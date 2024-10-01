@@ -23,6 +23,7 @@ const SignupForm = () => {
           isadmin,
         }
       );
+      console.log("regi", response);
       history("/login");
       setError("");
     } catch (error) {

@@ -6,8 +6,10 @@ import TaskList from "./TaskList";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [admin, setAdmin] = useState(false);
   let token = localStorage.getItem("jwt");
-  console.log("tokdfen", token);
+  const adminStatus = localStorage.getItem("isAdmin");
+  console.log("tokdfen", adminStatus);
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -20,6 +22,7 @@ const Dashboard = () => {
         withCredentials: true,
       });
       localStorage.removeItem("jwt");
+      localStorage.removeItem("isAdmin");
       navigate("/login");
     } catch (error) {
       console.error(
@@ -55,7 +58,7 @@ const Dashboard = () => {
           </div>
           <section className="relative flex flex-col items-center justify-between ">
             <h1>Welcome</h1>
-            <TaskList isAdmin={true} />
+            <TaskList isAdmin={adminStatus} />
           </section>
         </>
       )}
