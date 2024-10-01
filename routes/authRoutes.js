@@ -6,7 +6,9 @@ const { auth, adminAuth } = require("../middleware/auth");
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, isAdmin } = req.body;
+
+  const isAdminValue = isAdmin === "true" || isAdmin === true;
 
   try {
     const existingUser = await User.findOne({ username });
@@ -18,6 +20,7 @@ router.post("/register", async (req, res) => {
       username,
       password: hashedPassword,
       email,
+      isAdmin: isAdminValue,
     });
 
     await newUser.save();
@@ -33,17 +36,15 @@ router.post("/register", async (req, res) => {
       path: "/",
     });
 
-    res.status(201).json({ message: "User registered successfully", token });
+    res.status(201).json({ message: "User registered successfully", newUser });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
 });
 router.get("/user/:id", async (req, res) => {
   try {
-    // Extract the ID from the request parameters
     const userId = req.params.id;
 
-    // Find the user by ID
     const user = await User.findById(userId);
 
     if (!user) {
@@ -72,7 +73,7 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    console.log("tbboken", user);
+
     res.cookie("jwt", token, {
       httpOnly: false,
       secure: false,
@@ -88,7 +89,7 @@ router.post("/login", async (req, res) => {
 
 router.get("/users", auth, async (req, res) => {
   try {
-    const users = await User.find(); // Select only the fields you want to return (username, email, etc.)
+    const users = await User.find();
     res.status(200).json(users);
   } catch (error) {
     console.error("Error fetching users:", error);

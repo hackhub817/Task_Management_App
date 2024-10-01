@@ -12,19 +12,18 @@ const TaskList = ({ isAdmin }) => {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const { data } = await axios.get("http://localhost:5000/api/tasks", {
-        withCredentials: true, // Ensure that cookies are sent with the request
+      const { data } = await axios.get(`${window.location.origin}/api/tasks`, {
+        withCredentials: true,
       });
 
-      console.log("tasks", data);
       setTasks(data);
     };
     fetchTasks();
   }, [filters]);
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
-      withCredentials: true, // Ensure that cookies are sent with the request
+    await axios.delete(`${window.location.origin}/api/tasks/${id}`, {
+      withCredentials: true,
     });
     setTasks(tasks.filter((task) => task._id !== id));
   };
@@ -86,13 +85,15 @@ const TaskList = ({ isAdmin }) => {
                   >
                     Delete
                   </button>
-                  {isAdmin && (
+
+                  {isAdmin ? (
                     <Link to={`/assign-task/${task._id}`}>
                       <button className="bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded w-full md:w-auto">
                         Assign Task
                       </button>
                     </Link>
-                  )}
+                  ) : null}
+
                   <Link to={`/edit-task/${task._id}`}>
                     <button className="bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded w-full md:w-auto">
                       Update Task

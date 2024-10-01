@@ -12,7 +12,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/auth/login`,
+        `${window.location.origin}/api/auth/login`,
         {
           email,
           password,
@@ -27,7 +27,6 @@ const LoginForm = () => {
       setError("");
       console.log(response);
       console.log("isAdmin", response.data.isAdmin);
-
       localStorage.setItem("jwt", response.data.token);
       localStorage.setItem("isAdmin", response.data.isAdmin);
       history("/dashboard");

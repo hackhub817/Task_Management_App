@@ -5,14 +5,17 @@ import { useParams, useNavigate } from "react-router-dom";
 const AssignTask = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  const [selectedUser, setSelectedUser] = useState(""); // Store the user's name
-  const { id } = useParams(); // Task ID from the URL
+  const [selectedUser, setSelectedUser] = useState("");
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const { data } = await axios.get("http://localhost:5000/api/auth/users", {
-        withCredentials: true, // Ensure that cookies are sent with the request
-      });
+      const { data } = await axios.get(
+        `${window.location.origin}/api/auth/users`,
+        {
+          withCredentials: true,
+        }
+      );
       setUsers(data);
     };
     fetchUsers();
@@ -21,23 +24,24 @@ const AssignTask = () => {
   const handleAssign = async () => {
     if (selectedUser) {
       try {
-        // Find the user by name to get their _id for assigning the task
         const user = users.find((user) => user.username === selectedUser);
 
         if (user) {
           await axios.patch(
-            `http://localhost:5000/api/tasks/${id}/assign`,
+            `${window.location.origin}/api/tasks/${id}/assign`,
             {
-              assignedUser: user.username, // Use the user ID for assigning the task
+              assignedUser: user.username,
             },
             {
-              withCredentials: true, // Ensure that cookies are sent with the request
+              withCredentials: true,
             }
           );
           alert("Task assigned successfully");
           navigate("/dashboard");
         }
       } catch (error) {
+        alert("Only ADMIN can assign it ");
+        navigate("/dashboard");
         console.error("Error assigning task:", error);
       }
     } else {

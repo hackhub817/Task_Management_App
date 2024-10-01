@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const UpdateForm = ({ task }) => {
-  const { id } = useParams(); // Get the task ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -15,12 +15,11 @@ const UpdateForm = ({ task }) => {
   });
 
   useEffect(() => {
-    // Optionally, you can fetch the task data if it's not provided via props
     const fetchTask = async () => {
       if (!task) {
         try {
           const response = await axios.get(
-            `http://localhost:5000/api/tasks/${id}`,
+            `${window.location.origin}/api/tasks/${id}`,
             {
               withCredentials: true,
             }
@@ -38,7 +37,7 @@ const UpdateForm = ({ task }) => {
     e.preventDefault(); // Prevent the default form submit behavior
 
     try {
-      await axios.put(`http://localhost:5000/api/tasks/${id}`, formData, {
+      await axios.put(`${window.location.origin}/api/tasks/${id}`, formData, {
         withCredentials: true, // Ensure that cookies are sent with the request
       });
       navigate("/dashboard");

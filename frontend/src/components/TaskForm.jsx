@@ -18,10 +18,10 @@ const TaskForm = ({ task }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/tasks",
+        `${window.location.origin}/api/tasks`,
         formData,
         {
-          withCredentials: true, // Ensure that cookies are sent with the request
+          withCredentials: true,
         }
       );
 

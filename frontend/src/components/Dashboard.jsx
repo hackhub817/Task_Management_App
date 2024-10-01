@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [admin, setAdmin] = useState(false);
   let token = localStorage.getItem("jwt");
   const adminStatus = localStorage.getItem("isAdmin");
-  console.log("tokdfen", adminStatus);
+
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:5000/api/auth/logout", {
+      await axios.get(`${window.location.origin}/api/auth/logout`, {
         withCredentials: true,
       });
       localStorage.removeItem("jwt");
@@ -41,12 +41,7 @@ const Dashboard = () => {
           <div className="flex gap-4 sm:gap-8 lg:gap-12 flex-end justify-end sm:p-6 p-4">
             <Link to="/create-task">
               <div className="text-sm sm:text-lg lg:text-xl text-white font-semibold hover:text-gray-300 hover:shadow-xl">
-                Assign Task
-              </div>
-            </Link>
-            <Link to="/create-task">
-              <div className="text-sm sm:text-lg lg:text-xl text-white font-semibold hover:text-gray-300 hover:shadow-xl">
-                tasks
+                Create Tasks
               </div>
             </Link>
             <div
