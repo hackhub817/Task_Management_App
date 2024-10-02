@@ -44,6 +44,7 @@ A task management system built with Node.js, Express, MongoDB, and JWT authentic
 - **POST /tasks**: Create a task.
 - **PUT /tasks/:id**: Update a task.
 - **DELETE /tasks/:id**: Delete a task.
+- There many more apis wihch you can use when you will clone or browse this website
 
 ## Technologies
 - Node.js
@@ -52,8 +53,6 @@ A task management system built with Node.js, Express, MongoDB, and JWT authentic
 - JWT
 - TailwindCSS
 
-## Contributing
-Feel free to contribute! Fork the repository and submit a pull request.
+## Link
+You can browse the website with given link in right side.
 
-## License
-This project is licensed under the MIT License.
