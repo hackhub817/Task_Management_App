@@ -34,11 +34,11 @@ const UpdateForm = ({ task }) => {
   }, [id, task]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submit behavior
+    e.preventDefault();
 
     try {
       await axios.put(`${window.location.origin}/api/tasks/${id}`, formData, {
-        withCredentials: true, // Ensure that cookies are sent with the request
+        withCredentials: true,
       });
       navigate("/dashboard");
     } catch (error) {

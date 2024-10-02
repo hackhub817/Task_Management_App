@@ -52,7 +52,11 @@ const Dashboard = () => {
             </div>
           </div>
           <section className="relative flex flex-col items-center justify-between ">
-            <h1>Welcome</h1>
+            <h1 className="text-2xl font-bold text-gray-300">Welcome</h1>
+            <p className="text-lg text-gray-300">
+              If you want <span className="font-bold">Assign Button</span> then
+              login as Admin
+            </p>
             <TaskList isAdmin={adminStatus} />
           </section>
         </>

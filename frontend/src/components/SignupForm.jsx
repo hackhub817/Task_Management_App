@@ -20,12 +20,19 @@ const SignupForm = () => {
           username,
           email,
           password,
-          isadmin,
+          isAdmin: isadmin,
         }
       );
-      history("/login");
-      setError("");
+      console.log("res", response.status);
+      console.log("errrororoor", response.status.error);
+
+      if (response.status === 400) {
+        setError(response.data.error);
+      } else {
+        history("/login");
+      }
     } catch (error) {
+      console.log("error", error);
       if (error.response && error.response.data) {
         setError(
           error.response.data.error || "Signup failed. Please try again."

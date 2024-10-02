@@ -9,7 +9,7 @@ import AssignTask from "./components/AssignTask";
 import UpdateForm from "./components/UpdateForm";
 
 const App = () => {
-  const isAdmin = true; // You can replace this with logic to check the user's role
+  const isAdmin = true;
 
   return (
     <Router>

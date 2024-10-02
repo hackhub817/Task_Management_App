@@ -25,8 +25,6 @@ const LoginForm = () => {
         }
       );
       setError("");
-      console.log(response);
-      console.log("isAdmin", response.data.isAdmin);
       localStorage.setItem("jwt", response.data.token);
       localStorage.setItem("isAdmin", response.data.isAdmin);
       history("/dashboard");

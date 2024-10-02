@@ -63,7 +63,7 @@ const AssignTask = () => {
         <select
           id="assign-user"
           value={selectedUser}
-          onChange={(e) => setSelectedUser(e.target.value)} // Set user's name here
+          onChange={(e) => setSelectedUser(e.target.value)}
           className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">Select User</option>

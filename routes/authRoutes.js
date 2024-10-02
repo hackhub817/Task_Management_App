@@ -11,9 +11,9 @@ router.post("/register", async (req, res) => {
   const isAdminValue = isAdmin === "true" || isAdmin === true;
 
   try {
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ email });
     if (existingUser)
-      return res.status(200).json({ error: "Username already exists" });
+      return res.status(400).json({ error: "Email already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
@@ -51,7 +51,6 @@ router.get("/user/:id", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Return the username (or any other user details you want)
     res.json({ username: user.username });
   } catch (error) {
     console.error("Error fetching user:", error);

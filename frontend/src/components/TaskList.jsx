@@ -86,7 +86,7 @@ const TaskList = ({ isAdmin }) => {
                     Delete
                   </button>
 
-                  {isAdmin ? (
+                  {isAdmin === "true" ? (
                     <Link to={`/assign-task/${task._id}`}>
                       <button className="bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded w-full md:w-auto">
                         Assign Task
